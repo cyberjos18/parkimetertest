@@ -1,71 +1,157 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## This is a site use the Laravel Framework 5.8 how API engine
+##### Is important for beging you need:
+    - php: 7.2.* (Minimum)
+    - composer: 2.* (recommend)
+    - MariaDB 10.3 (Minimum)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+##### After please execute:
+      \>: composer update
 
-## About Laravel
+## About Database
+##### In this directory
+         parkimetertest/database/model
+You can have access to database diagram
+##### In this directory
+         covermanagertest/database/backup
+You can have access to database sql script for restore the database with information      
+## Link Site
+The URL for use this site is **http://127.0.0.1/covermanagertest/public/**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Api functionality
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **[createtable | POST](#)| /api/tables/createtable**
+##### Create tables in database, for this is neccesary this attributes:
+    - identificator => identificator number per table | Type: INT.
+    - cap_min       => Minimum capacity per table | Type: INT.
+    - cap_max       => Maximun capacity per table | Type: INT.  
+.
+.
+.
+For create a POST the estructure must be like it:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    "identificator":int,
+    "cap_min":int,
+    "cap_max":int
 
-## Learning Laravel
+If exist a error in validation this return 422 code:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    "errors": {
+        "attribute": [
+            "message"
+        ]
+    }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost you and your team's skills by digging into our comprehensive video library.
+If result is ok this return a 200 code:
 
-## Laravel Sponsors
+    "status": ok
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **[deletetable | DELETE](#)| /api/tables/deletetable/{identificator}**
+##### Delete tables in database, for this is neccesary this attributes:
+    - identificator => identificator number per table | Type: INT.
+.
+.
+.
+For create a DELETE the estructure must be like it:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
+    "identificator":int,
+    
 
-## Contributing
+If exist a error in validation this return 422:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    "errors": {
+        "attribute": [
+            "message"
+        ]
+    }
 
-## Security Vulnerabilities
+If result is ok this return a 200 OK:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    "status": ok
 
-## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **[createreservation | POST](#)| /api/reservations/createreservation**
+##### Create reservations in database, for this is neccesary this attributes:
+    - identificator => identificator number per table | Type: INT.
+    - client_name   => The name of the client | Type: VARCHAR(25).
+    - persons       => Persons in a table | Type: INT.
+    - reserve_date  => Date of the reserve | Type: DATE (DD-MM-YYYY) 
+.
+.
+.
+For create a POST the estructure must be like it:
+
+    "identificator":int,
+    "client_name":varchar(25),
+    "persons":int,
+    "reserve_date": date
+
+If exist a error in validation this return 422 code:
+
+    "errors": {
+        "attribute": [
+            "message"
+        ]
+    }
+
+If result is ok this return a 200 code and reserve number:
+
+    "status": "ok",
+        "information_reserve": {
+            "reserve_number": "number of reserve"
+        }
+        
+- **[checktablesreservation | GET](#)| /api/reservations/checktablesreservation/{reserve_date}/{persons}**
+##### Verificate available tables according date of reserve and persons in table, for this is neccesary this attributes:
+    - reserve_date  => Date of the reserve | Type: DATE (DD-MM-YYYY)
+    - persons       => Persons in a table | Type: INT.
+.
+.
+. 
+For create a GET the estructure must be like it:
+
+    "reserve_date": date    
+    "persons":int,
+
+If exist a error in validation this return 422 code:
+
+    "errors": {
+        "attribute": [
+            "message"
+        ]
+    }
+
+If result is ok this return a 200 code:
+
+    "status": "ok",
+        "available_tables": [
+            {
+                "identificator": int,
+                "cap_min": int,
+                "cap_max": int
+            },
+
+NOTE: The available tables are tables that NOT have reserve in the request date  
+
+- **[deletereservation | DELETE](#)| /api/reservations/deletereservation/{reserve_number}**
+##### Delete reservations in database for this is neccesary this attributes:
+
+    - reserve_number => identificator number per table | Type: VARCHAR(25).
+.
+.
+.
+For create a DELETE the estructure must be like it:
+
+    "reserve_number":varchar,
+    
+
+If exist a error in validation this return 422:
+
+    "errors": {
+        "attribute": [
+            "message"
+        ]
+    }
+
+If result is ok this return a 200 OK:
+
+    "status": ok      
