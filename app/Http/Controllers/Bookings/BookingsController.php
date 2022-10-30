@@ -31,6 +31,7 @@ class BookingsController extends Controller
         else
         {
 
+            /*Creating booking in database*/
             $result=$bookingPer->CreateBooking($request);
 
             if($result=="")
@@ -68,6 +69,7 @@ class BookingsController extends Controller
         }
         else
         {
+            /*List booking from database*/
             $result = $bookingPer->BookingList($request);
 
 

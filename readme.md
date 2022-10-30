@@ -12,146 +12,69 @@
          parkimetertest/database/model
 You can have access to database diagram
 ##### In this directory
-         covermanagertest/database/backup
+         parkimetertest/database/backup
 You can have access to database sql script for restore the database with information      
 ## Link Site
-The URL for use this site is **http://127.0.0.1/covermanagertest/public/**
+The URL for use this site is **http://127.0.0.1/parkimetertest/public/**
 
 ## Api functionality
 
-- **[createtable | POST](#)| /api/tables/createtable**
-##### Create tables in database, for this is neccesary this attributes:
-    - identificator => identificator number per table | Type: INT.
-    - cap_min       => Minimum capacity per table | Type: INT.
-    - cap_max       => Maximun capacity per table | Type: INT.  
+- **[ create booking | POST](#)| /api/bookings**
+##### Create booking in database, for this is neccesary this attributes:
+    - reserveId                   => ID of reserve | Type: VARCHAR(15)
+    - date_beging_reservation     => Date of beging booking | Type: DATATIME (DD-MM-YYYY H:i:s)
+    - date_beging_reservation     => Date of ending booking | Type: DATATIME (DD-MM-YYYY H:i:s)
+    - parking_id                  => ID of parking neccesary for the booking | Type: INT 
+    - vehicle_registration_number => number of the registration of the vehicle | Type: VARCHAR(15)
 .
 .
 .
 For create a POST the estructure must be like it:
 
-    "identificator":int,
-    "cap_min":int,
-    "cap_max":int
+    "reserveId" : VARCHAR(15)
+    "date_beging_reservation" : DATATIME (DD-MM-YYYY H:i:s)
+    "date_beging_reservation" : DATATIME (DD-MM-YYYY H:i:s)
+    "parking_id" : INT 
+    "vehicle_registration_number"  : VARCHAR(15)
+    .
 
 If exist a error in validation this return 422 code:
 
-    "errors": {
-        "attribute": [
-            "message"
-        ]
-    }
-
-If result is ok this return a 200 code:
-
-    "status": ok
-
-- **[deletetable | DELETE](#)| /api/tables/deletetable/{identificator}**
-##### Delete tables in database, for this is neccesary this attributes:
-    - identificator => identificator number per table | Type: INT.
-.
-.
-.
-For create a DELETE the estructure must be like it:
-
-    "identificator":int,
-    
-
-If exist a error in validation this return 422:
-
-    "errors": {
-        "attribute": [
-            "message"
-        ]
-    }
-
-If result is ok this return a 200 OK:
-
-    "status": ok
-
-
-- **[createreservation | POST](#)| /api/reservations/createreservation**
-##### Create reservations in database, for this is neccesary this attributes:
-    - identificator => identificator number per table | Type: INT.
-    - client_name   => The name of the client | Type: VARCHAR(25).
-    - persons       => Persons in a table | Type: INT.
-    - reserve_date  => Date of the reserve | Type: DATE (DD-MM-YYYY) 
-.
-.
-.
-For create a POST the estructure must be like it:
-
-    "identificator":int,
-    "client_name":varchar(25),
-    "persons":int,
-    "reserve_date": date
-
-If exist a error in validation this return 422 code:
-
-    "errors": {
-        "attribute": [
-            "message"
-        ]
+    "errors": { 
+       "message"
     }
 
 If result is ok this return a 200 code and reserve number:
 
-    "status": "ok",
-        "information_reserve": {
-            "reserve_number": "number of reserve"
-        }
+    "status": "ok"
         
-- **[checktablesreservation | GET](#)| /api/reservations/checktablesreservation/{reserve_date}/{persons}**
-##### Verificate available tables according date of reserve and persons in table, for this is neccesary this attributes:
-    - reserve_date  => Date of the reserve | Type: DATE (DD-MM-YYYY)
-    - persons       => Persons in a table | Type: INT.
+        
+- **[ booking list | GET](#)| /api/bookings/{reserveId}**
+##### Verificate booking reserve according reserve ID, for this is neccesary this attributes:
+    - reserveId  => ID of the reserve | Type: VARCHAR(15)    
 .
 .
 . 
 For create a GET the estructure must be like it:
 
-    "reserve_date": date    
-    "persons":int,
+    "reserveId": VARCHAR(15)        
 
 If exist a error in validation this return 422 code:
 
-    "errors": {
-        "attribute": [
-            "message"
-        ]
+    "errors": {       
+            "message"       
     }
 
 If result is ok this return a 200 code:
 
     "status": "ok",
-        "available_tables": [
+        "bookingresult": [
             {
-                "identificator": int,
-                "cap_min": int,
-                "cap_max": int
+                "reserveId": VARCHAR(15),
+                "date_beging_reservation": DATETIME (DD-MM-YYYY H:i:s),
+                "date_ending_reservation": DATETIME (DD-MM-YYYY H:i:s),
+                "parking_id": INT,
+                "vehicle_registration_number": VARCHAR(15)
             },
 
-NOTE: The available tables are tables that NOT have reserve in the request date  
-
-- **[deletereservation | DELETE](#)| /api/reservations/deletereservation/{reserve_number}**
-##### Delete reservations in database for this is neccesary this attributes:
-
-    - reserve_number => identificator number per table | Type: VARCHAR(25).
-.
-.
-.
-For create a DELETE the estructure must be like it:
-
-    "reserve_number":varchar,
-    
-
-If exist a error in validation this return 422:
-
-    "errors": {
-        "attribute": [
-            "message"
-        ]
-    }
-
-If result is ok this return a 200 OK:
-
-    "status": ok      
+ 
