@@ -49,18 +49,33 @@ class BookingPer
             $bookingList = Booking::where('reserveId','=',$reserveId)
                 ->first();
 
-            $result =
-                [
-                    'status' => 200,
-                    'bookingresult' =>
+            if($bookingList!==null)
+            {
+                $result =
                     [
-                        'reserveId' => $bookingList->reserveId,
-                        'date_beging_reservation' => Booking::ConvertFormatDateCarbonNotISO($bookingList->date_beging_reservation),
-                        'date_ending_reservation' => Booking::ConvertFormatDateCarbonNotISO($bookingList->date_ending_reservation),
-                        'parking_id' => $bookingList->parking_id,
-                        'vehicle_registration_number' => $bookingList->vehicle_registration_number,
-                    ]
-                ];
+                        'status' => 200,
+                        'bookingresult' =>
+                            [
+                                'reserveId' => $bookingList->reserveId,
+                                'date_beging_reservation' => Booking::ConvertFormatDateCarbonNotISO($bookingList->date_beging_reservation),
+                                'date_ending_reservation' => Booking::ConvertFormatDateCarbonNotISO($bookingList->date_ending_reservation),
+                                'parking_id' => $bookingList->parking_id,
+                                'vehicle_registration_number' => $bookingList->vehicle_registration_number,
+                            ]
+                    ];
+            }
+            else
+            {
+                $result =
+                    [
+                        'status' => 200,
+                        'bookingresult' =>
+                            [
+                                'message' => "Don't exist a booking with this reserve number"
+                            ]
+                    ];
+            }
+
 
             return $result;
 

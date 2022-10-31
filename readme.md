@@ -76,5 +76,13 @@ If result is ok this return a 200 code:
                 "parking_id": INT,
                 "vehicle_registration_number": VARCHAR(15)
             },
+            
+If reserve don't exist return a 200 code:  
+
+        "status": "ok",
+                "bookingresult": [
+                    {
+                        "message"
+                    },          
 
  
