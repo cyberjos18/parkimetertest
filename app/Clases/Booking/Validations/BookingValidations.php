@@ -25,28 +25,28 @@ class BookingValidations
             switch($requestType)
             {
                 case '1':
-                    $data = array
-                    (
+                    $data =
+                    [
                         'reserveId' => $request->reserveId,
                         'date_beging_reservation' => Booking::ConvertFormatDateCarbon($request->date_beging_reservation),
                         'date_ending_reservation' => Booking::ConvertFormatDateCarbon($request->date_ending_reservation),
                         'parking_id' => $request->parking_id,
                         'vehicle_registration_number' => $request->vehicle_registration_number
 
-                    );
+                    ];
 
 
-                    $rules = array
-                    (
+                    $rules =
+                    [
                         'reserveId' => 'required|unique:bookings,reserveId',
                         'date_beging_reservation'   => 'required|date_format:Y-m-d H:i:s',
                         'date_ending_reservation'       => 'required|date_format:Y-m-d H:i:s',
                         'parking_id'  => 'required',
                         'vehicle_registration_number' => 'required'
-                    );
+                    ];
 
-                    $messages = array
-                    (
+                    $messages =
+                    [
                         'reserveId.required' => 'The number of reserve is required',
                         'reserveId.unique' => 'The number of reserve already exist please check again',
                         'date_beging_reservation.required' => 'The date beging reservation is required',
@@ -55,7 +55,7 @@ class BookingValidations
                         'date_ending_reservation.date_format' => 'The date ending reservation format must be YYYY-MM-DD H:i:s',
                         'parking_id.required' => 'The parking ID is required',
                         'vehicle_registration_number.required' => 'The vehicle registration number is required'
-                    );
+                    ];
 
                     $v = Validator::make($data, $rules, $messages);
 
@@ -68,21 +68,21 @@ class BookingValidations
                     break;
                 case '2';
 
-                    $data = array
-                    (
+                    $data =
+                    [
                         'reserveId' => $request,
-                    );
+                    ];
 
 
-                    $rules = array
-                    (
+                    $rules =
+                    [
                         'reserveId' => 'required',
-                    );
+                    ];
 
-                    $messages = array
-                    (
+                    $messages =
+                    [
                         'reserveId.required' => 'The number of reserve is required',
-                    );
+                    ];
 
                     $v = Validator::make($data, $rules, $messages);
 
